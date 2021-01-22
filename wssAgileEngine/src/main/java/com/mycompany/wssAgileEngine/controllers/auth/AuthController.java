@@ -1,5 +1,6 @@
 package com.mycompany.wssAgileEngine.controllers.auth;
 
+import com.mycompany.wssAgileEngine.dtos.LoginDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.mycompany.wssAgileEngine.utils.CalendarUtilidades;
 import javax.servlet.http.HttpServletRequest;

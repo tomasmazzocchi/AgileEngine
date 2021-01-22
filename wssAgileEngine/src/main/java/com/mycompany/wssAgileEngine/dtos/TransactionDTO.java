@@ -10,10 +10,10 @@ public class TransactionDTO {
 
     private String id;
     private String type;
-    private Float amount;
+    private Double amount;
     private Calendar effectiveDate;
 
-    public TransactionDTO(String id, String type, Float amount, Calendar effectiveDate) {
+    public TransactionDTO(String id, String type, Double amount, Calendar effectiveDate) {
         this.id = id;
         this.type = type;
         this.amount = amount;
@@ -39,11 +39,11 @@ public class TransactionDTO {
         this.type = type;
     }
 
-    public Float getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Float amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

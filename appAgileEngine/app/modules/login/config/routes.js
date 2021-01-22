@@ -27,7 +27,7 @@ angular.module('login')
                         url: '/login',
                         views: {
                             "view-main": {
-                                templateUrl: 'modules/login/views/meeting.html',
+                                templateUrl: 'modules/login/views/login.html',
                                 controller: 'LoginController'
                             }
                         }

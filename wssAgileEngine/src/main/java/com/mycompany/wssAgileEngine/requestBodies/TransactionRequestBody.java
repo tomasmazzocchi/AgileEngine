@@ -7,12 +7,12 @@ package com.mycompany.wssAgileEngine.requestBodies;
 public class TransactionRequestBody {
     private String accountId;
     private String type;
-    private Float amount;
+    private Double amount;
 
     public TransactionRequestBody() {
     }
 
-    public TransactionRequestBody(String accountId, String type, Float amount) {
+    public TransactionRequestBody(String accountId, String type, Double amount) {
         this.accountId = accountId;
         this.type = type;
         this.amount = amount;
@@ -34,11 +34,11 @@ public class TransactionRequestBody {
         this.type = type;
     }
 
-    public Float getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Float amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 }

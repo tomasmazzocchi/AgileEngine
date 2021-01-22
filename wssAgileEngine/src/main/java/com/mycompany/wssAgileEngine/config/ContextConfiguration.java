@@ -5,6 +5,7 @@ import com.mycompany.wssAgileEngine.client.RestTemplateRequest;
 import com.mycompany.wssAgileEngine.dao.generic.AccountDao;
 import com.mycompany.wssAgileEngine.dao.generic.GenericDao;
 import com.mycompany.wssAgileEngine.dao.generic.TransactionDao;
+import com.mycompany.wssAgileEngine.model.Account;
 import com.mycompany.wssAgileEngine.services.account.AccountService;
 import com.mycompany.wssAgileEngine.services.generic.GenericService;
 import com.mycompany.wssAgileEngine.services.generic.GenericServiceImpl;
@@ -14,6 +15,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
 import net.sf.ehcache.config.CacheConfiguration;
 import net.sf.ehcache.config.PersistenceConfiguration;
 import net.sf.ehcache.config.PersistenceConfiguration.Strategy;
@@ -41,7 +43,8 @@ import org.springframework.web.client.RestTemplate;
 public class ContextConfiguration {
 
     private static final String DATASOURCE = "jdbc/pool/agileEnginePool";
-    private static final String USUARIO_CACHE = "usuarioCache";
+    private static final String TRANSACTION_CACHE = "transactionCache";
+    private static final String ACCOUNT_CACHE = "accountCache";
     private static final String PROP_SHOW_SQL = "hibernate.show_sql";
     private static final String PROP_SECOND_CACHE = "hibernate.cache.use_second_level_cache";
     private static final String PROP_CACHE_PROVIDER = "hibernate.cache.provider_class";
@@ -54,26 +57,42 @@ public class ContextConfiguration {
     @Bean
     public CacheManager getCacheManager() {
         CacheManager manager = CacheManager.create();
-        Cache usuarioCache = new Cache(
-                new CacheConfiguration(USUARIO_CACHE, 1000)
+        Cache transactionCache = new Cache(
+                new CacheConfiguration(TRANSACTION_CACHE, 1000)
                         .memoryStoreEvictionPolicy(MemoryStoreEvictionPolicy.LFU)
                         .eternal(false)
                         .timeToLiveSeconds(60)
                         .timeToIdleSeconds(30)
                         .diskExpiryThreadIntervalSeconds(0)
                         .persistence(new PersistenceConfiguration().strategy(Strategy.LOCALTEMPSWAP)));
-        if (manager.getCache(USUARIO_CACHE) == null) {
-             manager.addCache(usuarioCache);
+        Cache accountCache = new Cache(
+                new CacheConfiguration(ACCOUNT_CACHE, 1000)
+                        .memoryStoreEvictionPolicy(MemoryStoreEvictionPolicy.LFU)
+                        .eternal(false)
+                        .timeToLiveSeconds(60)
+                        .timeToIdleSeconds(30)
+                        .diskExpiryThreadIntervalSeconds(0)
+                        .persistence(new PersistenceConfiguration().strategy(Strategy.LOCALTEMPSWAP)));
+        if (manager.getCache(TRANSACTION_CACHE) == null) {
+            manager.addCache(transactionCache);
+        }
+        if (manager.getCache(ACCOUNT_CACHE) == null) {
+            manager.addCache(accountCache);
         }
         return manager;
     }
 
-    @Bean(name = "usuarioCache")
-    public Cache getUsuarioCache(CacheManager cacheManager) {
-        return cacheManager.getCache(USUARIO_CACHE);
+    @Bean(name = "accountCache")
+    public Cache getAccountCache(CacheManager cacheManager) {
+        return cacheManager.getCache(ACCOUNT_CACHE);
     }
 
-    @Bean
+    @Bean(name = "transactionCache")
+    public Cache getTransactionCache(CacheManager cacheManager) {
+        return cacheManager.getCache(TRANSACTION_CACHE);
+    }
+
+    /*@Bean
     public DataSource getDataSource() throws NamingException {
         JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
         DataSource dataSource = dsLookup.getDataSource(DATASOURCE);
@@ -105,22 +124,22 @@ public class ContextConfiguration {
         builder.failOnUnknownProperties(false);
         return builder;
     }
-    
+
     @Autowired
-    public void accountService(AccountService accountService, AccountDao accountDao) {                       
-          initializeService(accountService, accountDao); 
+    public void accountService(AccountService accountService, AccountDao accountDao) {
+        initializeService(accountService, accountDao);
     }
-    
+
     @Autowired
-    public void transactionService(TransactionService transactionService, TransactionDao transactioDao) {                       
-          initializeService(transactionService, transactioDao); 
+    public void transactionService(TransactionService transactionService, TransactionDao transactioDao) {
+        initializeService(transactionService, transactioDao);
     }
 
     private GenericService initializeService(GenericService service, GenericDao genericDao) {
         ((GenericServiceImpl) service).setGenericDao(genericDao);
         return service;
-    }
-    
+    }*/
+
     @Autowired
     public void restTemplateRequest(RestTemplateRequest restTemplateRequest) {
         RestTemplate restTemplate = restTemplateRequest;

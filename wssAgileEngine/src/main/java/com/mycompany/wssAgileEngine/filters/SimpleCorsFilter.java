@@ -36,8 +36,8 @@ public class SimpleCorsFilter implements Filter {
         response.setHeader("Access-Control-Allow-Origin", "*"); 
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
         response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with, x-auth-token, idDominio, tokenMF, tokenTerm, idDominioMF, idUsuario, idSesion, Content-Type, expiresIn, idInternacion, idEfector");        
-        response.setHeader("Access-Control-Expose-Headers", "tokenMF, tokenTerm, idSesion, msg, expiresIn, x-auth-token");                
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with, x-auth-token, idUsuario, Content-Type, expiresIn");        
+        response.setHeader("Access-Control-Expose-Headers", " msg, expiresIn, x-auth-token");                
         req.setCharacterEncoding("UTF-8");
         res.setCharacterEncoding("UTF-8");       
         if ("OPTIONS".equalsIgnoreCase(((HttpServletRequest) req).getMethod())) {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author Tomas Mazzocchi
  */
-@Repository
+//@Repository
 public class TransactionDao extends GenericDaoImpl<Transaction, Long>{
 
 }

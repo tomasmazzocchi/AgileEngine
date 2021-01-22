@@ -7,12 +7,12 @@ package com.mycompany.wssAgileEngine.model;
 public class Account {
     private Long id;
     private String fullName;
-    private Float balance;
+    private Double balance;
 
     public Account() {
     }
     
-    public Account(Long id, String fullName, Float balance) {
+    public Account(Long id, String fullName, Double balance) {
         this.id = id;
         this.fullName = fullName;
         this.balance = balance;
@@ -34,23 +34,23 @@ public class Account {
         this.fullName = fullName;
     }
 
-    public Float getTotalAmount() {
+    public Double getTotalAmount() {
         return balance;
     }
 
-    public void setTotalAmount(Float balance) {
+    public void setTotalAmount(Double balance) {
         this.balance = balance;
     }
     
-    public void creditAmount(Float amount) {
+    public void creditAmount(Double amount) {
         this.balance = this.balance + amount;
     }
     
-    public void deditAmount(Float amount) {
+    public void deditAmount(Double amount) {
         this.balance = this.balance - amount;
     }
 
-    public boolean hasEnoughBalance(Float amount) {
+    public boolean hasEnoughBalance(Double amount) {
         return this.balance > amount;
     }
 

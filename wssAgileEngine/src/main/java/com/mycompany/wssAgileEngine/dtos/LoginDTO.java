@@ -1,6 +1,6 @@
-package com.mycompany.wssAgileEngine.controllers.auth;
+package com.mycompany.wssAgileEngine.dtos;
 
-class LoginDTO {
+public class LoginDTO {
     private String usuario;
     private String password;
 
