@@ -11,6 +11,7 @@ public class TransactionDTO {
     private String id;
     private String type;
     private Double amount;
+    private Double balance;
     private Calendar effectiveDate;
 
     public TransactionDTO(String id, String type, Double amount, Calendar effectiveDate) {
@@ -19,6 +20,23 @@ public class TransactionDTO {
         this.amount = amount;
         this.effectiveDate = effectiveDate;
     } 
+
+    public TransactionDTO(String id, String type, Double amount, Double balance, Calendar effectiveDate) {
+        this.id = id;
+        this.type = type;
+        this.amount = amount;
+        this.balance = balance;
+        this.effectiveDate = effectiveDate;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+    
 
     public TransactionDTO() {
     }

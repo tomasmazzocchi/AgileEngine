@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
  *
  * @author Tomas Mazzocchi
  */
-//@Repository
-public class AccountDao extends GenericDaoImpl<Account, Long>{
-
-}
+////@Repository
+//public class AccountDao extends GenericDaoImpl<Account, Long>{
+//
+//}

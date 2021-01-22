@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  * @author Tomas Mazzocchi
  */
 //@Repository
-public class TransactionDao extends GenericDaoImpl<Transaction, Long>{
-
-}
+//public class TransactionDao extends GenericDaoImpl<Transaction, Long>{
+//
+//}

@@ -26,46 +26,46 @@ import org.springframework.stereotype.Repository;
 public abstract class GenericDaoImpl<T, ID extends Serializable> implements GenericDao<T, ID>{    
     
     private final Class<T> persistentClass;          
-    @Autowired
-    SessionFactory sessionFactory;   
+//    @Autowired
+//    SessionFactory sessionFactory;   
           
     public GenericDaoImpl() {  
         this.persistentClass = (Class<T>) ((ParameterizedType) getClass()  
                                 .getGenericSuperclass()).getActualTypeArguments()[0];  
      }    
   
-    protected Session getSession(boolean applyFilter) {  
-     Session s =  sessionFactory.getCurrentSession();     
-  
-     if (s == null)  
-            throw new IllegalStateException("La sesión no ha sido instanciada correctamente");  
-        return s;  
-    }  
+//    protected Session getSession(boolean applyFilter) {  
+////     Session s =  sessionFactory.getCurrentSession();     
+//  
+//     if (s == null)  
+//            throw new IllegalStateException("La sesión no ha sido instanciada correctamente");  
+//        return s;  
+//    }  
   
     private Class<T> getPersistentClass() {  
         return persistentClass;  
     }  
   
-@Override    
-    public T obtenerPorId(ID id) {  
-        return  (T) getSession(false).get(getPersistentClass(), id);            
-    }  
+//@Override    
+//    public T obtenerPorId(ID id) {  
+////        return  (T) getSession(false).get(getPersistentClass(), id);            
+//    }  
     
-    @Override    
-    public T obtenerPorPropiedadesIguales(Map<Fieldeable, Serializable> props) { 
-        Map map = new HashMap();
-        Criteria c = this.createCriteria();
-        for (Map.Entry<Fieldeable, Serializable> e : props.entrySet()) {
-            map.put(e.getKey().getField(), e.getValue());
-        }
-        this.addAliases(c, this.getAliases());
-        return  (T) c.add(Restrictions.allEq(map)).uniqueResult();            
-    }  
+//    @Override    
+//    public T obtenerPorPropiedadesIguales(Map<Fieldeable, Serializable> props) { 
+//        Map map = new HashMap();
+////        Criteria c = this.createCriteria();
+//        for (Map.Entry<Fieldeable, Serializable> e : props.entrySet()) {
+//            map.put(e.getKey().getField(), e.getValue());
+//        }
+//        this.addAliases(c, this.getAliases());
+//        return  (T) c.add(Restrictions.allEq(map)).uniqueResult();            
+//    }  
     
-    @Override
-    public List<T> obtenerPorCriterios(Map<Fieldeable, Map<RestrictionEnum, Serializable>> props){      
-         return this.findByCriteriaWithDefaultFilter(this.createCriterions(props));
-    }
+//    @Override
+//    public List<T> obtenerPorCriterios(Map<Fieldeable, Map<RestrictionEnum, Serializable>> props){      
+//         return this.findByCriteriaWithDefaultFilter(this.createCriterions(props));
+//    }
   
     
     protected List<Criterion> createCriterions(Map<Fieldeable, Map<RestrictionEnum, Serializable>> props){
@@ -78,17 +78,17 @@ public abstract class GenericDaoImpl<T, ID extends Serializable> implements Gene
         return crits;
     }
     
-    @Override    
-    public List<T> obtenerTodos() {  
-        return findByCriteriaWithDefaultFilter(EMPTY_RESTRICTIONS);  
-    }          
-    
-    @Override        
-    public T  agregarOActualizar(T entidad) throws Exception{                
-        getSession(false).saveOrUpdate(entidad);            
-        this.setContenidoSesionMedica(entidad);
-        return entidad;  
-    }
+//    @Override    
+//    public List<T> obtenerTodos() {  
+//        return findByCriteriaWithDefaultFilter(EMPTY_RESTRICTIONS);  
+//    }          
+//    
+//    @Override        
+//    public T  agregarOActualizar(T entidad) throws Exception{                
+//        getSession(false).saveOrUpdate(entidad);            
+//        this.setContenidoSesionMedica(entidad);
+//        return entidad;  
+//    }
     
     @Override    
     public List<T>  agregarOActualizarMuchos(List<T> entidades) throws Exception{          
@@ -99,10 +99,10 @@ public abstract class GenericDaoImpl<T, ID extends Serializable> implements Gene
         return entidades;  
     }
   
-    @Override       
-    public void eliminar(T entidad) throws Exception{           
-        getSession(false).delete(entidad);  
-    }  
+//    @Override       
+//    public void eliminar(T entidad) throws Exception{           
+//        getSession(false).delete(entidad);  
+//    }  
     
     @Override    
     public void eliminarMuchos(List<T> entidades) throws Exception{
@@ -111,10 +111,10 @@ public abstract class GenericDaoImpl<T, ID extends Serializable> implements Gene
         }
     }
 
-    @Override
-    public void refresh(T entidad) throws Exception {
-        getSession(false).refresh(entidad);
-    }        
+//    @Override
+//    public void refresh(T entidad) throws Exception {
+//        getSession(false).refresh(entidad);
+//    }        
     
     protected void setContenidoSesionMedica(T entidad) throws Exception {        
     }                         
@@ -131,13 +131,13 @@ public abstract class GenericDaoImpl<T, ID extends Serializable> implements Gene
      return EMPTY_ALIASES;
     }        
   
-    protected List<T> findByCriteriaWithDefaultFilter(List<Criterion> criterions) {  
-        Criteria crit = createCriteria();         
-         this.addAliases(crit, this.getAliases());
-         this.addOrder(crit, this.getOrderByForAll());
-         this.addRestrictions(crit, this.getDefaultFilter());        
-        return findByCriteria(crit, criterions);
-   }        
+//    protected List<T> findByCriteriaWithDefaultFilter(List<Criterion> criterions) {  
+//        Criteria crit = createCriteria();         
+//         this.addAliases(crit, this.getAliases());
+//         this.addOrder(crit, this.getOrderByForAll());
+//         this.addRestrictions(crit, this.getDefaultFilter());        
+//        return findByCriteria(crit, criterions);
+//   }        
    
     protected List<T> findByCriteria(Criteria criteria, List<Criterion> criterions) {          
         this.addRestrictions(criteria, criterions);
@@ -158,9 +158,9 @@ public abstract class GenericDaoImpl<T, ID extends Serializable> implements Gene
         return criteria;
     }
 
-    protected Criteria createCriteria(){
-        return getSession(true).createCriteria(getPersistentClass());  
-    }
+//    protected Criteria createCriteria(){
+//        return getSession(true).createCriteria(getPersistentClass());  
+//    }
     
 
 protected String createAlias ( Criteria criteria, String associationPath )

@@ -2,20 +2,11 @@ package com.mycompany.wssAgileEngine.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mycompany.wssAgileEngine.client.RestTemplateRequest;
-import com.mycompany.wssAgileEngine.dao.generic.AccountDao;
-import com.mycompany.wssAgileEngine.dao.generic.GenericDao;
-import com.mycompany.wssAgileEngine.dao.generic.TransactionDao;
-import com.mycompany.wssAgileEngine.model.Account;
-import com.mycompany.wssAgileEngine.services.account.AccountService;
-import com.mycompany.wssAgileEngine.services.generic.GenericService;
-import com.mycompany.wssAgileEngine.services.generic.GenericServiceImpl;
-import com.mycompany.wssAgileEngine.services.transaction.TransactionService;
 import java.nio.charset.StandardCharsets;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.Element;
 import net.sf.ehcache.config.CacheConfiguration;
 import net.sf.ehcache.config.PersistenceConfiguration;
 import net.sf.ehcache.config.PersistenceConfiguration.Strategy;
@@ -42,7 +33,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableScheduling
 public class ContextConfiguration {
 
-    private static final String DATASOURCE = "jdbc/pool/agileEnginePool";
+    private static final String DATASOURCE = "jdbc/pool/zepPool";
     private static final String TRANSACTION_CACHE = "transactionCache";
     private static final String ACCOUNT_CACHE = "accountCache";
     private static final String PROP_SHOW_SQL = "hibernate.show_sql";
@@ -92,7 +83,7 @@ public class ContextConfiguration {
         return cacheManager.getCache(TRANSACTION_CACHE);
     }
 
-    /*@Bean
+    @Bean
     public DataSource getDataSource() throws NamingException {
         JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
         DataSource dataSource = dsLookup.getDataSource(DATASOURCE);
@@ -124,7 +115,7 @@ public class ContextConfiguration {
         builder.failOnUnknownProperties(false);
         return builder;
     }
-
+/*
     @Autowired
     public void accountService(AccountService accountService, AccountDao accountDao) {
         initializeService(accountService, accountDao);

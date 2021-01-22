@@ -46,6 +46,12 @@ public class TransactionController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<?> getTransactions() {
+        
+        
+//        Account userAccount = new Account(1L, "User Test", 1000.0);
+//        accountCache.put(new Element(1L, userAccount));
+        
+        
         List<TransactionDTO> transactionDTOList = new ArrayList<>();
         Map<Object, Element> mapTransactions = transactionCache.getAll(transactionCache.getKeys());
         mapTransactions.values().stream().forEach(element -> {
@@ -103,6 +109,6 @@ public class TransactionController {
         transactionCache.put(new Element(stringDate, transaction));
 //        transactionService.agregarOActualizar(transaction); GOING TO BD
 
-        return new TransactionDTO(transaction.getId(), transaction.getType(), account.getTotalAmount(), transaction.getEffectiveDate());
+        return new TransactionDTO(transaction.getId(), transaction.getType(), amount, account.getTotalAmount(), transaction.getEffectiveDate());
     }
 }

@@ -21,8 +21,6 @@ public class MainWebAppInitializer implements WebApplicationInitializer{
     
     @Override
     public void onStartup(ServletContext sc) throws ServletException {
-        Account userAccount = new Account(1L, "User Test", 1000.0);
-        accountCache.put(new Element(1L, userAccount));
     }
     
 }

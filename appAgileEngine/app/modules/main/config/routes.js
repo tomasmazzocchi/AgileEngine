@@ -16,7 +16,7 @@ angular.module('main')
                             templateUrl: 'modules/main/views/main.html',
                             abstract : true
                         })
-                        .state('app.main.challengeSantander', {
+                        .state('app.main.agileEngine', {
                             url: '/agileEngine',
                             abstract : true,
                             views: {

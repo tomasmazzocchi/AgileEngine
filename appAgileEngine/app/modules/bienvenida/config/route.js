@@ -16,7 +16,7 @@ angular.module('bienvenida')
                             views: {
                                 "content-main": {
                                     templateUrl: 'modules/bienvenida/views/transactions.html',
-                                    controller: 'meetingController'
+                                    controller: 'transactionController'
                                 }
                             }
                         });
