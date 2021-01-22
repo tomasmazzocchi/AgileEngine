@@ -1,0 +1,9 @@
+{
+	"endpoint" : {
+		"url": "",
+                "envContext": "http://localhost:8080/wssAgileEngine/api/dominio/environment"
+	},
+        "oid" : "",
+        "loginPath" : "",
+        "loginType" : ""
+}
