@@ -40,8 +40,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/log").permitAll()                           
                 .antMatchers("/api/auth/login").permitAll()   
                 .antMatchers("/api/dominio/environment").permitAll()   
-                .antMatchers("/api/meeting/").permitAll()   
-                .antMatchers("/api/meeting").permitAll()   
+                .antMatchers("/api/transaction").permitAll()   
                 .antMatchers("/api/**").permitAll()   
                 // All other request need to be authenticated
                 .anyRequest().authenticated().and()
